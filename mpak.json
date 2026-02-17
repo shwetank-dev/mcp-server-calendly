@@ -1,0 +1,5 @@
+{
+  "$schema": "https://mpak.dev/schemas/mpak.json",
+  "name": "@nimblebraininc/calendly",
+  "maintainers": ["shwetank-dev"]
+}

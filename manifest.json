@@ -1,0 +1,66 @@
+{
+  "manifest_version": "0.4",
+  "name": "@nimblebraininc/calendly",
+  "display_name": "Calendly",
+  "version": "0.1.0",
+  "description": "MCP server for Calendly scheduling — event types, scheduled events, invitees, availability, and cancellations.",
+  "long_description": "Connect Claude to your Calendly account. Browse event types, view and filter scheduled meetings, inspect invitee details, check availability windows, and cancel events — all without leaving your AI workflow.\n\n## Features\n\n- **Event Types** — list all your Calendly event types with duration and scheduling URL\n- **Scheduled Events** — query upcoming or past meetings with status, date, and location filters\n- **Invitees** — retrieve attendee details for any scheduled event\n- **Availability** — check open time slots for a given event type and date range\n- **Cancellation** — cancel events programmatically with an optional reason\n\n## Requirements\n\nA Calendly Personal Access Token from [Calendly Integrations](https://calendly.com/integrations/api_webhooks).",
+  "author": {
+    "name": "NimbleBrain Inc"
+  },
+  "license": "MIT",
+  "keywords": ["calendly", "scheduling", "calendar", "events", "availability", "meetings"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NimbleBrainInc/mcp-calendly"
+  },
+  "homepage": "https://nimblebrain.ai",
+  "documentation": "https://github.com/NimbleBrainInc/mcp-calendly#readme",
+  "support": "https://github.com/NimbleBrainInc/mcp-calendly/issues",
+  "privacy_policies": ["https://calendly.com/privacy"],
+  "compatibility": {
+    "platforms": ["darwin", "linux", "win32"],
+    "runtimes": {
+      "node": ">=22.0.0"
+    }
+  },
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "Calendly API Key",
+      "description": "Personal Access Token from https://calendly.com/integrations/api_webhooks",
+      "sensitive": true,
+      "required": true
+    }
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "build/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/build/index.js", "--stdio"],
+      "env": {
+        "CALENDLY_API_KEY": "${user_config.api_key}"
+      }
+    }
+  },
+  "tools": [
+    { "name": "get_current_user", "description": "Get the authenticated Calendly user's profile" },
+    { "name": "list_event_types", "description": "List the user's Calendly event types" },
+    { "name": "list_scheduled_events", "description": "List scheduled Calendly events with optional filters" },
+    { "name": "get_event", "description": "Get details of a specific scheduled event" },
+    { "name": "list_invitees", "description": "List invitees for a scheduled event" },
+    { "name": "cancel_event", "description": "Cancel a scheduled Calendly event" },
+    { "name": "check_availability", "description": "Get available time slots for an event type" }
+  ],
+  "_meta": {
+    "org.mpaktrust": {
+      "mtf_version": "0.1",
+      "permissions": {
+        "network": ["api.calendly.com"],
+        "filesystem": "none",
+        "subprocess": "none"
+      }
+    }
+  }
+}
