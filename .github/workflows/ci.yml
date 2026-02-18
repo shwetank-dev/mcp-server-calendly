@@ -49,3 +49,27 @@ jobs:
 
       - name: Run tests
         run: npm run test
+
+  bundle:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install and build
+        run: npm ci && npm run build
+
+      - name: Prune dev dependencies
+        run: npm prune --omit=dev
+
+      - name: Test bundle creation
+        run: |
+          pip install mcpb
+          mcpb pack
+          ls -la *.mcpb
