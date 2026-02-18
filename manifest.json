@@ -6,7 +6,8 @@
   "description": "MCP server for Calendly scheduling — event types, scheduled events, invitees, availability, and cancellations.",
   "long_description": "Connect Claude to your Calendly account. Browse event types, view and filter scheduled meetings, inspect invitee details, check availability windows, and cancel events — all without leaving your AI workflow.\n\n## Features\n\n- **Event Types** — list all your Calendly event types with duration and scheduling URL\n- **Scheduled Events** — query upcoming or past meetings with status, date, and location filters\n- **Invitees** — retrieve attendee details for any scheduled event\n- **Availability** — check open time slots for a given event type and date range\n- **Cancellation** — cancel events programmatically with an optional reason\n\n## Requirements\n\nA Calendly Personal Access Token from [Calendly Integrations](https://calendly.com/integrations/api_webhooks).",
   "author": {
-    "name": "NimbleBrain Inc"
+    "name": "NimbleBrain Inc",
+    "email": "hello@nimblebrain.ai"
   },
   "license": "MIT",
   "keywords": ["calendly", "scheduling", "calendar", "events", "availability", "meetings"],
