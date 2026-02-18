@@ -19,13 +19,20 @@ ARCH=$(uname -m)
 OUTPUT="${NAME}-${VERSION}-${OS}-${ARCH}.mcpb"
 
 echo "Building bundle: $OUTPUT"
-echo "Packing files (respecting .mcpbignore)..."
+rm -f "$OUTPUT"
+echo "Staging files (respecting .mcpbignore)..."
 
-# Create tarball excluding ignored patterns
-tar czf "$OUTPUT" \
+# Stage into a temp dir so zip doesn't need --exclude-from support
+STAGING=$(mktemp -d)
+trap "rm -rf '$STAGING'" EXIT
+
+rsync -a \
   --exclude-from=.mcpbignore \
   --exclude="*.mcpb" \
   --exclude=".git" \
-  .
+  . "$STAGING/"
+
+# Pack as zip (mpak expects zip format)
+(cd "$STAGING" && zip -r "$PROJECT_DIR/$OUTPUT" . -q)
 
 echo "Bundle created: $OUTPUT ($(du -h "$OUTPUT" | cut -f1))"
