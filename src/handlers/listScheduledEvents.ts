@@ -1,9 +1,9 @@
-import type { z } from 'zod';
-import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
-import type { ListScheduledEventsSchema } from '../schemas.js';
-import { CalendlyClient } from '../utils/calendlyClient.js';
-import { errorResponse } from '../utils/errorResponse.js';
-import { formatPaginated, formatScheduledEvent } from '../formatters.js';
+import type { z } from "zod";
+import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
+import type { ListScheduledEventsSchema } from "../schemas.js";
+import { CalendlyClient } from "../utils/calendlyClient.js";
+import { errorResponse } from "../utils/errorResponse.js";
+import { formatPaginated, formatScheduledEvent } from "../formatters.js";
 
 export async function listScheduledEvents(
   client: CalendlyClient,
@@ -18,7 +18,18 @@ export async function listScheduledEvents(
       minStartTime: args.min_start_time,
       maxStartTime: args.max_start_time,
     });
-    return { content: [{ type: 'text', text: JSON.stringify(formatPaginated(result, formatScheduledEvent), null, 2) }] };
+    return {
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify(
+            formatPaginated(result, formatScheduledEvent),
+            null,
+            2,
+          ),
+        },
+      ],
+    };
   } catch (e) {
     return errorResponse(e);
   }

@@ -5,7 +5,7 @@ import type {
   Invitee,
   AvailableTime,
   PaginatedResponse,
-} from './types.js';
+} from "./types.js";
 
 export function formatUser(user: CalendlyUser) {
   return {
